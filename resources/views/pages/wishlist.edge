@@ -1,0 +1,74 @@
+@layout.app({ title: 'Wishlist | Redo Technologies' })
+
+  @slot('main')
+    <main>
+      <section class="wishlist-hero">
+        <div class="wishlist-overlay">
+          <h1>
+            Your Service Wishlist
+          </h1>
+          <p>
+            Services you're interested in
+          </p>
+        </div>
+      </section>
+
+      <div class="gradient-divider">
+      </div>
+
+      <section class="wishlist-content">
+        <div class="wishlist-container">
+          <div id="wishlistItems" class="wishlist-grid">
+          </div>
+
+          <div id="emptyWishlist" class="empty-wishlist" style="display: none;">
+            <h2>
+              Your wishlist is empty
+            </h2>
+            <p>
+              Browse our services and add items to your wishlist
+            </p>
+            <a href="/services" class="cta-btn">Browse Services</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="gradient-divider-footer">
+    </div>
+
+    <script>
+      function loadWishlist() {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+        const wishlistItems = document.getElementById("wishlistItems");
+        const emptyWishlist = document.getElementById("emptyWishlist");
+        if (wishlist.length === 0) {
+          wishlistItems.style.display = "none";
+          emptyWishlist.style.display = "block";
+        } else {
+          wishlistItems.style.display = "grid";
+          emptyWishlist.style.display = "none";
+          wishlistItems.innerHTML = wishlist.map(service => `
+                                            <div class="wishlist-item" data-id="${service.id}">
+                                              <h3>${service.title}</h3>
+                                              <p>${service.desc}</p>
+                                              <div class="wishlist-actions">
+                                                <a href="/contact" class="contact-service-btn">Contact Us</a>
+                                                <button onclick="removeFromWishlist('${service.id}')" class="remove-btn">Remove</button>
+                                              </div>
+                                            </div>
+                                          `).join("");
+        }
+      }
+
+      function removeFromWishlist(id) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+        wishlist = wishlist.filter(item => item.id !== id);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        loadWishlist();
+      }
+
+      loadWishlist();
+    </script>
+  @endslot
+  
+@end

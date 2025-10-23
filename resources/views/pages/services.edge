@@ -1,0 +1,55 @@
+@layout.app({ title: 'Redo - Services' })
+
+  @slot('main')
+    @vite('resources/js/services.js')
+
+    <main>
+      <!-- Hero Section -->
+      <section class="services-hero">
+        <div class="services-hero-overlay">
+        </div>
+        <div class="services-hero-content">
+          <h1>
+            OUR SERVICES
+          </h1>
+        </div>
+      </section>
+
+      <div class="gradient-divider">
+      </div>
+
+      <!-- Services List Section -->
+      <section class="services-list">
+        <!-- 🔍 Search Bar -->
+        <div class="services-search-container">
+          <input type="text" id="serviceSearch" class="service-search-input" placeholder="Search our services..." />
+        </div>
+
+        <div class="services-inner">
+          @each(service in services)
+            <div class="service-cards" data-id="{{ service.id }}">
+              <h2>
+                {{ service.title }}
+              </h2>
+              <p>
+                {{ service.description }}
+              </p>
+              <a href="/contact" class="learn-more">Learn more →</a>              <br />
+              <button class="add-to-wishlist">Add to Wishlist</button>
+            </div>
+          @endeach
+          
+          @if(!services || services.length === 0)
+            <p class="empty-msg">
+              No services available yet.
+            </p>
+          @endif
+        </div>
+      </section>
+
+      <div class="gradient-divider-footer">
+      </div>
+    </main>
+  @endslot
+  
+@end

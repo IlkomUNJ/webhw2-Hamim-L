@@ -1,0 +1,45 @@
+@layout.app({ title: 'Seller Dashboard | Redo Technologies' })
+
+  @slot('main')
+    <main class="dashboard">
+      <h1>
+        Welcome to Seller Dashboard
+      </h1>
+      <p>
+        Hello, <span id="userEmail">Seller</span>!
+      </p>
+
+      <button onclick="logoutUser()">Logout</button>
+
+      <section class="service-manager">
+        <h2>
+          Manage Your Services
+        </h2>
+
+        <form action="{{ route('seller.services.create') }}" method="POST" class="add-service-form">
+          <input type="text" name="title" placeholder="Service Title" required />
+          <textarea name="description" placeholder="Service Description" required></textarea>
+          <button type="submit">Add Service</button>
+        </form>
+
+        <h3>
+          Your Services
+        </h3>
+        <ul>
+          @each(service in services)
+            <li>
+              <strong>{{ service.title }}</strong>- {{ service.description }}
+              <form
+                action="{{ route('admin.services.delete',{id: service.id}) }}"
+                method="POST"
+                style="display:inline;"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </li>
+          @endeach
+        </ul>
+      </section>
+    </main>
+  @endslot
+@end

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {{ title || "Redo E-Commerce" }}
+    </title>
+
+    @vite (['resources/css/styles.css'])
+
+    @if ($slots.meta)
+      {{{ await $slots.meta() }}}
+    @endif
+  </head>
+
+  <body>
+
+    @include('partials/header')
+    {{{ await $slots.main() }}}
+    @include('partials/footer')
+
+  </body>
+
+</html>

@@ -1,0 +1,51 @@
+@layout.app( {title: 'Redo - Contact'} )
+
+  @slot('main')
+    <main>
+      <!-- SOC HERO / CONTACT SECTION -->
+      <section class="soc-hero">
+        <div class="soc-left">
+          <h4>
+            ★ Talk to a Cybersecurity Expert
+          </h4>
+          <h1>
+            Need a Trusted SOC Partner? Let’s Connect.
+          </h1>
+          <p>
+            Modern cybersecurity services built for cloud-native, hybrid, and
+          multi-cloud environments.
+          </p>
+        </div>
+
+        <div class="soc-right">
+          <form class="soc-form">
+            <div class="form-row">
+              <input type="text" placeholder="First Name" required />
+              <input type="text" placeholder="Last Name" required />
+            </div>
+            <input type="email" placeholder="Email" required />
+            <input type="text" placeholder="Company Name" required />
+            <input type="text" placeholder="Country/Region" required />
+            <select required>
+              <option value="">
+                What solution are you most interested in?
+              </option>
+              <option value="soc">
+                SOC as a Service
+              </option>
+              <option value="vapt">
+                VAPT Services
+              </option>
+              <option value="incident">
+                Incident Response
+              </option>
+            </select>
+            <textarea placeholder="Tell us about your requirements" rows="4" required></textarea>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  @endslot
+    
+@end
